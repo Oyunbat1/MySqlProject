@@ -9,17 +9,17 @@ body {
 
 .title {
   position: relative;
-  bottom: 15rem;
-  left: 20rem; }
+  bottom: 16rem;
+  left: 22rem; }
 
 form {
   background-color: #fff;
-  padding: 20px;
+  padding: 40px;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   max-width: 400px;
   width: 100%;
-  margin-right: 13rem; }
+  margin-right: 10rem; }
   form h1 {
     font-size: 24px;
     margin-bottom: 20px;
