@@ -5,14 +5,13 @@ const cors = require('cors');
 const path = require('path');
 const app = express();
 
-
+// Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
-
+// Static file serving
 app.use(express.static(path.join(__dirname, 'public')));
-
 app.use('/dist', express.static(path.join(__dirname, 'dist')));
 
 // MySQL connection
@@ -31,11 +30,10 @@ connection.connect(err => {
     console.log('MySQL тэй холбогдлоо');
 });
 
-
+// Routes
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
-
 
 app.post('/add-student', (req, res) => {
     const { name, studentID, class: studentClass } = req.body;
@@ -50,7 +48,6 @@ app.post('/add-student', (req, res) => {
     });
 });
 
-
 app.get('/students', (req, res) => {
     connection.query('SELECT * FROM students', (err, results) => {
         if (err) {
@@ -61,7 +58,8 @@ app.get('/students', (req, res) => {
     });
 });
 
-
-app.listen(3000, () => {
-    console.log('Server running on http://localhost:3000');
+// Dynamic port for Heroku
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+    console.log(`Server running on port ${port}`);
 });
