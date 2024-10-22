@@ -3,27 +3,37 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ОЮУТНЫ БҮРТГЭЛ</title>
+    <!-- Link to compiled CSS -->
     <link rel="stylesheet" href="/dist/css/main.css">
-    <title>Student Form</title>
 </head>
 
 <body>
-    <style>
-        body {
-            background-color: lightblue;
-        }
-    </style>
-    <h1 class="title">Сурагч нэмэх</h1>
+    <h1>ОЮУТНЫ БҮРТГЭЛЫН ФОРМ</h1>
     <form id="studentForm">
-        <label for="name">Сурагчийн нэр:</label>
-        <input type="text" id="name" name="name" required><br><br>
-        <label for="studentID">Оюутны код:</label>
-        <input type="text" id="studentID" name="studentID" required><br><br>
-        <label for="class">Анги:</label>
-        <input type="text" id="class" name="class" required><br><br>
+        <label for="name">Овог:</label>
+        <input type="text" id="name" name="name" required><br>
+
+        <label for="surname">Нэр:</label>
+        <input type="text" id="surname" name="surname" required><br>
+
+        <label for="register">Регистр:</label>
+        <input type="text" id="register" name="register" required><br>
+
+        <label for="major">Мэргэжил:</label>
+        <select id="major" name="major" required>
+            <option value="SW">Программ хангамжийн инжинер</option>
+            <option value="IT">Мэдээлэл зүйн багш</option>
+        </select><br>
+
+        <label for="status">Иргэний гэрээ:</label>
+        <input type="checkbox" id="status" name="status"><br>
+
         <button type="submit">Илгээх</button>
     </form>
+
     <script src="script.js"></script>
 </body>
 
