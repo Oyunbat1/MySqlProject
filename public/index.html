@@ -3,38 +3,35 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ОЮУТНЫ БҮРТГЭЛ</title>
-    <!-- Link to compiled CSS -->
+    <title>Student Registration</title>
     <link rel="stylesheet" href="/dist/css/main.css">
 </head>
 
 <body>
-    <h1>ОЮУТНЫ БҮРТГЭЛЫН ФОРМ</h1>
-    <form id="studentForm">
-        <label for="name">Овог:</label>
-        <input type="text" id="name" name="name" required><br>
+    <div class="form-container">
+        <h1>Student Registration Form</h1>
+        <form id="studentForm">
+            <label for="username">First Name:</label>
+            <input type="text" id="username" required>
 
-        <label for="surname">Нэр:</label>
-        <input type="text" id="surname" name="surname" required><br>
+            <label for="surname">Last Name:</label>
+            <input type="text" id="surname" required>
 
-        <label for="register">Регистр:</label>
-        <input type="text" id="register" name="register" required><br>
+            <label for="major">Major:</label>
+            <select id="major" required>
+                <option value="SW">Software Engineering</option>
+                <option value="IT">Information Technology</option>
+            </select>
 
-        <label for="major">Мэргэжил:</label>
-        <select id="major" name="major" required>
-            <option value="SW">Программ хангамжийн инжинер</option>
-            <option value="IT">Мэдээлэл зүйн багш</option>
-        </select><br>
+            <label for="status">Good Student?</label>
+            <input type="checkbox" id="status" checked> Yes
 
-        <label for="status">Иргэний гэрээ:</label>
-        <input type="checkbox" id="status" name="status"><br>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
 
-        <button type="submit">Илгээх</button>
-    </form>
-
-    <script src="script.js"></script>
+    <script src="/script.js"></script>
 </body>
 
 </html>

@@ -5,53 +5,51 @@ const cors = require('cors');
 const path = require('path');
 const app = express();
 
-// POST method -- ууд холбох хэсэг 
+// Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
-//  static files
+// Serve static files
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/dist', express.static(path.join(__dirname, 'dist')));
 
-// MySQL холболт 
+// MySQL connection
 const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'Oyunbat3a4b$',
+    password: 'Oyunbat3a4b$', // Use your actual password
     database: 'school_db'
 });
 
 connection.connect(err => {
     if (err) {
-        console.error('MySQL холболтын алдаа: ', err);
+        console.error('MySQL connection error: ', err);
         return;
     }
-    console.log('MySQL амжилттай холбогдлоо...');
+    console.log('Connected to MySQL');
 });
 
-// Serve HTML form
+// Route to serve the HTML file
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-// Илгээх хэсэг
+// Route to add a student
 app.post('/add-student', (req, res) => {
-    const { name, surname, register, studentID, major, status } = req.body;
-    console.log('Received data:', req.body);
+    const { firstName, lastName, major, studentId } = req.body;
 
-    const sql = 'INSERT INTO students (name, surname, register, student_id, major, status) VALUES (?, ?, ?, ?, ?, ?)';
-
-    connection.query(sql, [name, surname, register, studentID, major, status], (err, result) => {
+    const sql = 'INSERT INTO students (student_name, student_surname, major, student_id) VALUES (?, ?, ?, ?)';
+    connection.query(sql, [firstName, lastName, major, studentId], (err, result) => {
         if (err) {
-            console.error('Оюутан оруулах алдаа:', err);  // Log server-side errors
-            return res.status(500).send('Алдаа.');
+            console.error('Error:', err);
+            return res.status(500).send('Error registering student.');
         }
-        console.log('Оюутан амжилттай нэмэгдлээ:', result);
-        res.send('Оюутан амжилттай нэмэгдлээ:');
+        res.send(`Student successfully registered with ID: ${studentId}`);
     });
 });
 
-app.listen(3000, () => {
-    console.log('Server маань энэ host-ндээр асаж байна http://localhost:3000');
+// Start the server
+app.listen(process.env.PORT || 3000, () => {
+    console.log('Server running on http://localhost:3000');
 });
