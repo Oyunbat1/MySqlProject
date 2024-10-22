@@ -16,6 +16,7 @@ document.getElementById('studentForm').addEventListener('submit', async (e) => {
         lastName,
         major,
         studentId,
+        isGoodStudent
     };
 
     try {
