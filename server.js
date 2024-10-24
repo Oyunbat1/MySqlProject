@@ -5,20 +5,20 @@ const cors = require('cors');
 const path = require('path');
 const app = express();
 
-// Middleware
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
-// Serve static files
+
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/dist', express.static(path.join(__dirname, 'dist')));
 
-// MySQL connection
+// MySQL холбоот
 const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'Oyunbat3a4b$', // Use your actual password
+    password: 'Oyunbat3a4b$',
     database: 'school_db'
 });
 
@@ -30,20 +30,19 @@ connection.connect(err => {
     console.log('Connected to MySQL');
 });
 
-// Route to serve the HTML file
+// HTML file ажиллах хэсэг 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-// Route to add a student
+// Оюутан нэмэх хэсэг 
 app.post('/add-student', (req, res) => {
     const { firstName, lastName, major, isGoodStudent } = req.body;
-    const year = new Date().getFullYear().toString().slice(-2); // last 2 digits of the year
+    const year = new Date().getFullYear().toString().slice(-2); // Сүүлийн 2 орон сугалж авах хэсэг 
 
-    // Determine student status ('S' for good student, 'D' for not good)
     const studentStatus = isGoodStudent ? 'S' : 'D';
 
-    // Query to get the last student ID for the current year, major, and status
+    // Query
     const sqlGetLastId = `SELECT student_id FROM students 
                           WHERE student_id LIKE 'M.${major}${year}${studentStatus}%' 
                           ORDER BY student_id DESC LIMIT 1`;
@@ -54,8 +53,8 @@ app.post('/add-student', (req, res) => {
             return res.status(500).send('Error fetching last student ID');
         }
 
-        // Determine the next student number
-        let nextNumber = '001'; // Default to '001'
+        //
+        let nextNumber = '001';
         if (results.length > 0) {
             const lastId = results[0].student_id;
             const lastNumber = parseInt(lastId.slice(-3), 10); // Get last 3 digits
